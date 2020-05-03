@@ -14,7 +14,7 @@ quick_sort/quick_sort
 radix_sort/radix_sort
 selection_sort/selection_sort
 shell_sort/shell_sort
-test_data/test_data
+test_data/random
 test_data/generated/
 
 
