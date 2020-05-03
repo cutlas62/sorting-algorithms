@@ -1,4 +1,5 @@
 #include "utils.h"
+#include <sys/stat.h>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -28,31 +29,31 @@ statistics_t shell_sort(int *arr, int n);
 
 statistics_t (*sort_fun)(int *arr, int n);
 
-
+//TODO implement the two sorting modes
 
 void usage (void)
 {
-    // TODO
+    printf("[%s]\n", __FILE__);
+    printf("Description: Test different sorting algorithms with generated test data\n");
+    printf("Parameters:\n");
+    printf("  -h, --help               Display this information\n");
+    printf("  -m, --mode <mode>        Sorting order\n");
+    printf("                             <mode> can be 'low_to_high' or 'high_to_low'. By default it's 'low_to_high'\n");
+    printf("  -f, --file               Input file with random data to sort. This file has to be in test_data/\n");
+    printf("  -v, --verbose            Display both the unsorted and sorted data\n");
+    printf("  -s, --stats              Display algorithms statistics\n");
+    printf("  -a, --alg <algorithm>    Select the sorting algorithm to test. Posible <algorithm> are:\n");
+    printf("                             bitonic, bubble, cocktail_shaker, double_selection, gcc_std, gcc_std_stable,\n");
+    printf("                             gnome, gravity, heap, insertion, merge, quick, radix, selection, shell\n");
+    printf("Examples:\n");
+    printf("  ./main -s -v -f 100random.txt -a cocktail_shaker\n");
+    printf("  ./main -s -a bubble\n");
 }
 
-void print_array(int *arr, int n)
-{
-    int n_columns = 5;
-    int n_rows = n / n_columns;
-    for(int i = 0; i < n_rows; i++)
-    {
-        for(int j = 0; j < n_columns; j++)
-        {
-            printf("%d", *(arr + i * n_columns + j));
-            printf("\t");
-        }
-        printf("\n");
-    }
-}
 
 int main (int argc, char *argv[])
 {
-    // Sort the values from low to high by default
+    // Default values
     string mode = "low_to_high";
     string file = "test_data/100random.txt";
     bool verbose = false;
@@ -89,7 +90,11 @@ int main (int argc, char *argv[])
                 {
                     file = "test_data/";
                     file += argv[++i];
-                    // TODO check that the file exists
+                    struct stat buffer;   
+                    if(stat (file.c_str(), &buffer)){
+                        printf("%s is not a valid file\n", file.c_str());
+                        return -1;
+                    } 
                 }
             }
             else if((arg == "-v") || (arg == "--verbose"))
@@ -198,7 +203,6 @@ int main (int argc, char *argv[])
         if(getline(random_file, line))
         {
             n_rows = stoi(line);
-            //TODO check n_rows
         }
         int random_array [n_rows] = {0};
         int i = 0;
@@ -228,9 +232,9 @@ int main (int argc, char *argv[])
 
         if(print_stats){
             printf("\nStats:\n");
-            printf("\tTotal time: %d micros\n", stats.time);
-            printf("\tArray accesses: %d\n", stats.array_accesses);
-            printf("\tComparisons : %d\n", stats.comparisons);
+            printf("\tTotal time: %lu micros (%.2f seconds)\n", stats.time, stats.time / 1000000.0);
+            printf("\tArray accesses: %lu\n", stats.array_accesses);
+            printf("\tComparisons : %lu\n", stats.comparisons);
         }
     }
     else
@@ -238,6 +242,4 @@ int main (int argc, char *argv[])
         printf("Could not open file '%s'\n", file.c_str());
         return -1;
     }
-
-
 }
