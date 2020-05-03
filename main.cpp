@@ -1,3 +1,4 @@
+#include "utils.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -5,13 +6,27 @@
 
 using namespace std;
 
-//TODO add statistics
+
+
+statistics_t bitonic_sort(int *arr, int n);
+statistics_t bubble_sort(int *arr, int n);
+statistics_t cocktail_shaker_sort(int *arr, int n);
+statistics_t double_selection_sort(int *arr, int n);
+statistics_t gcc_std_sort(int *arr, int n);
+statistics_t gcc_std_stable_sort(int *arr, int n);
+statistics_t gnome_sort(int *arr, int n);
+statistics_t gravity_sort(int *arr, int n);
+statistics_t heap_sort(int *arr, int n);
+statistics_t insertion_sort(int *arr, int n);
+statistics_t merge_sort(int *arr, int n);
+statistics_t quick_sort(int *arr, int n);
+statistics_t radix_sort(int *arr, int n);
+statistics_t selection_sort(int *arr, int n);
+statistics_t shell_sort(int *arr, int n);
 
 
 
-void bubble_sort(int *arr, int n);
-
-void (*sort_fun)(int *arr, int n);
+statistics_t (*sort_fun)(int *arr, int n);
 
 
 
@@ -41,6 +56,7 @@ int main (int argc, char *argv[])
     string mode = "low_to_high";
     string file = "test_data/100random.txt";
     bool verbose = false;
+    bool print_stats = false;
 
     // ser input overrides default values
     if(argc > 1)
@@ -82,7 +98,7 @@ int main (int argc, char *argv[])
             }
             else if((arg == "-s") || (arg == "--stats"))
             {
-
+                print_stats = true;
             }
             else if((arg == "-a") || (arg == "--alg"))
             {
@@ -90,10 +106,65 @@ int main (int argc, char *argv[])
                 if(i + 1 < argc)
                 {
                     string sorting_alg = argv[++i];
-                    if(sorting_alg == "bubble_sort")
+                    if (sorting_alg == "bitonic")
+                    {
+                        sort_fun = &bitonic_sort;
+                    }
+                    else if (sorting_alg == "bubble")
                     {
                         sort_fun = &bubble_sort;
-
+                    }
+                    else if (sorting_alg == "cocktail_shaker")
+                    {
+                        sort_fun = &cocktail_shaker_sort;
+                    }
+                    else if (sorting_alg == "double_selection")
+                    {
+                        sort_fun = &double_selection_sort;
+                    }
+                    else if (sorting_alg == "gcc_std")
+                    {
+                        sort_fun = &gcc_std_sort;
+                    }
+                    else if (sorting_alg == "gcc_std_stable")
+                    {
+                        sort_fun = &gcc_std_stable_sort;
+                    }
+                    else if (sorting_alg == "gnome")
+                    {
+                        sort_fun = &gnome_sort;
+                    }
+                    else if (sorting_alg == "gravity")
+                    {
+                        sort_fun = &gravity_sort;
+                    }
+                    else if (sorting_alg == "heap")
+                    {
+                        sort_fun = &heap_sort;
+                    }
+                    else if (sorting_alg == "insertion")
+                    {
+                        sort_fun = &insertion_sort;
+                    }
+                    else if (sorting_alg == "merge")
+                    {
+                        sort_fun = &merge_sort;
+                    }
+                    else if (sorting_alg == "quick")
+                    {
+                        sort_fun = &quick_sort;
+                    }
+                    else if (sorting_alg == "radix")
+                    {
+                        sort_fun = &radix_sort;
+                    }
+                    else if (sorting_alg == "selection")
+                    {
+                        sort_fun = &selection_sort;
+                    }
+                    else if (sorting_alg == "shell")
+                    {
+                        sort_fun = &shell_sort;
                     }
                     else
                     {
@@ -145,13 +216,21 @@ int main (int argc, char *argv[])
         }
 
         // Sort the array!
-        sort_fun(&random_array[0], n_rows);
+        statistics_t stats = {0};
+        stats = sort_fun(&random_array[0], n_rows);
 
         if(verbose)
         {
             printf("Sorted array:\n");
             print_array(&random_array[0], n_rows);
             printf("\n");
+        }
+
+        if(print_stats){
+            printf("\nStats:\n");
+            printf("\tTotal time: %d micros\n", stats.time);
+            printf("\tArray accesses: %d\n", stats.array_accesses);
+            printf("\tComparisons : %d\n", stats.comparisons);
         }
     }
     else

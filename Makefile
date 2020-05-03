@@ -1,6 +1,7 @@
 SHELL = /bin/sh
 
 OBJS = 	main.cpp \
+		utils.cpp \
 		bitonic_sort/bitonic_sort.cpp \
 		bubble_sort/bubble_sort.cpp \
 		cocktail_shaker_sort/cocktail_shaker_sort.cpp \

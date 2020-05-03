@@ -1,9 +1,12 @@
-
+#include "../utils.h"
 #include <stdbool.h>
 
-void bubble_sort(int *arr, int n)
+statistics_t bubble_sort(int *arr, int n)
 {
+    statistics_t ret = {0};
+
 	bool sorted = true;
+    uint64_t start_time = microsSinceEpoch();
     for(int i = 0; i < n; i++)
     {
     	for(int j = 0; j < n - i - 1; j++){
@@ -19,4 +22,6 @@ void bubble_sort(int *arr, int n)
     		break;
     	}
     }
+    ret.time = microsSinceEpoch() - start_time;
+    return ret;
 }
