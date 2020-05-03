@@ -20,6 +20,8 @@ statistics_t insertion_sort(int *arr, int n)
                 *(arr + j - 1) = tmp;
 
                 ret.array_accesses = ret.array_accesses + 4;
+            }else{
+            	break;
             }
         }
     }
