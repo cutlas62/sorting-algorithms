@@ -27,7 +27,7 @@ int main (int argc, char *argv[])
 {
     // Default values
     string file_name = "";
-    const char file_directory [] = "generated/";
+    const char file_directory [] = "test_data/";
     string mode = "random";
     string n_rows = to_string(5000);
     string file_extension = ".txt";
