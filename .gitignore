@@ -1,21 +1,7 @@
 # Custom files and folders
-bitonic_sort/bitonic_sort
-bubble_sort/bubble_sort
-cocktail_shaker_sort/cocktail_shaker_sort
-double_selection_sort/double_selection_sort
-gcc_std_sort/gcc_std_sort
-gcc_std_stable_sort/gcc_std_stable_sort
-gnome_sort/gnome_sort
-gravity_sort/gravity_sort
-heap_sort/heap_sort
-insertion_sort/insertion_sort
-merge_sort/merge_sort
-quick_sort/quick_sort
-radix_sort/radix_sort
-selection_sort/selection_sort
-shell_sort/shell_sort
-test_data/random
-test_data/generated/
+test_data/
+main
+test_data_generator
 
 
 
