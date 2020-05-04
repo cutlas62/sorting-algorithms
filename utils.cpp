@@ -4,13 +4,16 @@
 void print_array(int *arr, int n)
 {
     int n_columns = 5;
-    int n_rows = n / n_columns;
+    int n_rows = n / n_columns + 1;
     for(int i = 0; i < n_rows; i++)
     {
         for(int j = 0; j < n_columns; j++)
         {
-            printf("%d", *(arr + i * n_columns + j));
-            printf("\t");
+            if((i * n_columns + j) < n)
+            {
+                printf("%d", *(arr + i * n_columns + j));
+                printf("\t");
+            }
         }
         printf("\n");
     }

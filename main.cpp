@@ -10,7 +10,7 @@ using namespace std;
 
 
 statistics_t bitonic_sort(int *arr, int n);
-statistics_t bubble_sort(int *arr, int n);
+statistics_t bubble_sort(int *arr, int n);              // Done
 statistics_t cocktail_shaker_sort(int *arr, int n);
 statistics_t double_selection_sort(int *arr, int n);
 statistics_t gcc_std_sort(int *arr, int n);
@@ -18,7 +18,7 @@ statistics_t gcc_std_stable_sort(int *arr, int n);
 statistics_t gnome_sort(int *arr, int n);
 statistics_t gravity_sort(int *arr, int n);
 statistics_t heap_sort(int *arr, int n);
-statistics_t insertion_sort(int *arr, int n);
+statistics_t insertion_sort(int *arr, int n);           // Done
 statistics_t merge_sort(int *arr, int n);
 statistics_t quick_sort(int *arr, int n);
 statistics_t radix_sort(int *arr, int n);
@@ -232,7 +232,7 @@ int main (int argc, char *argv[])
 
         if(print_stats){
             printf("\nStats:\n");
-            printf("\tTotal time: %lu micros (%.2f seconds)\n", stats.time, stats.time / 1000000.0);
+            printf("\tTotal time: %lu micros (%.3f seconds)\n", stats.time, stats.time / 1000000.0);
             printf("\tArray accesses: %lu\n", stats.array_accesses);
             printf("\tComparisons : %lu\n", stats.comparisons);
         }
