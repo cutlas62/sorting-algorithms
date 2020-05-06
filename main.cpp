@@ -19,7 +19,7 @@ statistics_t gnome_sort(int *arr, int n);
 statistics_t gravity_sort(int *arr, int n);
 statistics_t heap_sort(int *arr, int n);
 statistics_t insertion_sort(int *arr, int n);           // Done
-statistics_t merge_sort(int *arr, int n);
+statistics_t merge_sort(int *arr, int n);               // Done
 statistics_t quick_sort(int *arr, int n);
 statistics_t radix_sort(int *arr, int n);
 statistics_t selection_sort(int *arr, int n);
