@@ -22,7 +22,7 @@ statistics_t insertion_sort(int *arr, int n);           // Done
 statistics_t merge_sort(int *arr, int n);               // Done
 statistics_t quick_sort(int *arr, int n);
 statistics_t radix_sort(int *arr, int n);
-statistics_t selection_sort(int *arr, int n);
+statistics_t selection_sort(int *arr, int n);           // Done
 statistics_t shell_sort(int *arr, int n);
 
 
