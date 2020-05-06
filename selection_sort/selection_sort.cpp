@@ -3,6 +3,7 @@
 
 statistics_t selection_sort(int *arr, int n)
 {
+    printf("Sorting array with selection sort...\n\n");
     statistics_t ret = {0};
     uint64_t start_t = microsSinceEpoch();
 

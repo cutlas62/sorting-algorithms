@@ -11,8 +11,7 @@ using namespace std;
 
 statistics_t bitonic_sort(int *arr, int n);
 statistics_t bubble_sort(int *arr, int n);              // Done
-statistics_t cocktail_shaker_sort(int *arr, int n);
-statistics_t double_selection_sort(int *arr, int n);
+statistics_t cocktail_shaker_sort(int *arr, int n);     // Done
 statistics_t gcc_std_sort(int *arr, int n);
 statistics_t gcc_std_stable_sort(int *arr, int n);
 statistics_t gnome_sort(int *arr, int n);
@@ -22,7 +21,7 @@ statistics_t insertion_sort(int *arr, int n);           // Done
 statistics_t merge_sort(int *arr, int n);               // Done
 statistics_t quick_sort(int *arr, int n);
 statistics_t radix_sort(int *arr, int n);
-statistics_t selection_sort(int *arr, int n);           // Done
+statistics_t selection_sort(int *arr, int n);           // Done, minor improvement can be done, we can find the minimum in the whole array [i, n] instead of [j, n]
 statistics_t shell_sort(int *arr, int n);
 
 
@@ -43,7 +42,7 @@ void usage (void)
     printf("  -v, --verbose            Display both the unsorted and sorted data\n");
     printf("  -s, --stats              Display algorithms statistics\n");
     printf("  -a, --alg <algorithm>    Select the sorting algorithm to test. Posible <algorithm> are:\n");
-    printf("                             bitonic, bubble, cocktail_shaker, double_selection, gcc_std, gcc_std_stable,\n");
+    printf("                             bitonic, bubble, cocktail_shaker, gcc_std, gcc_std_stable,\n");
     printf("                             gnome, gravity, heap, insertion, merge, quick, radix, selection, shell\n");
     printf("Examples:\n");
     printf("  ./main -s -v -f 100random.txt -a cocktail_shaker\n");
@@ -90,11 +89,12 @@ int main (int argc, char *argv[])
                 {
                     file = "test_data/";
                     file += argv[++i];
-                    struct stat buffer;   
-                    if(stat (file.c_str(), &buffer)){
+                    struct stat buffer;
+                    if(stat (file.c_str(), &buffer))
+                    {
                         printf("%s is not a valid file\n", file.c_str());
                         return -1;
-                    } 
+                    }
                 }
             }
             else if((arg == "-v") || (arg == "--verbose"))
@@ -122,10 +122,6 @@ int main (int argc, char *argv[])
                     else if (sorting_alg == "cocktail_shaker")
                     {
                         sort_fun = &cocktail_shaker_sort;
-                    }
-                    else if (sorting_alg == "double_selection")
-                    {
-                        sort_fun = &double_selection_sort;
                     }
                     else if (sorting_alg == "gcc_std")
                     {
@@ -230,7 +226,8 @@ int main (int argc, char *argv[])
             printf("\n");
         }
 
-        if(print_stats){
+        if(print_stats)
+        {
             printf("\nStats:\n");
             printf("\tTotal time: %lu micros (%.3f seconds)\n", stats.time, stats.time / 1000000.0);
             printf("\tArray accesses: %lu\n", stats.array_accesses);

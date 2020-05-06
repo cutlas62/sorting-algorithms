@@ -5,7 +5,6 @@ OBJS = 	main.cpp \
 		bitonic_sort/bitonic_sort.cpp \
 		bubble_sort/bubble_sort.cpp \
 		cocktail_shaker_sort/cocktail_shaker_sort.cpp \
-		double_selection_sort/double_selection_sort.cpp \
 		gcc_std_sort/gcc_std_sort.cpp \
 		gnome_sort/gnome_sort.cpp \
 		heap_sort/heap_sort.cpp \
