@@ -21,8 +21,8 @@ statistics_t insertion_sort(int *arr, int n);           // Done
 statistics_t merge_sort(int *arr, int n);               // Done
 statistics_t quick_sort(int *arr, int n);
 statistics_t radix_sort(int *arr, int n);
-statistics_t selection_sort(int *arr, int n);           // Done, minor improvement can be done, we can find the minimum in the whole array [i, n] instead of [j, n]
-statistics_t shell_sort(int *arr, int n);
+statistics_t selection_sort(int *arr, int n);           // Done
+statistics_t shell_sort(int *arr, int n);				// In progress
 
 
 
