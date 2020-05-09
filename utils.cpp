@@ -19,7 +19,12 @@ void print_array(int *arr, int n)
     }
 }
 
-
+void swap (int *f, int *s)
+{
+    int tmp = *f;
+    *f = *s;
+    *s = tmp;
+}
 
 uint64_t microsSinceEpoch(void)
 {

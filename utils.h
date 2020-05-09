@@ -12,6 +12,7 @@ struct statistics_t {
 };
 
 void print_array(int *arr, int n);
+void swap (int *f, int *s);
 uint64_t microsSinceEpoch(void);
 
 #endif
