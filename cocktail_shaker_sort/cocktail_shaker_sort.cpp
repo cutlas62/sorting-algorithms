@@ -2,7 +2,7 @@
 
 statistics_t cocktail_shaker_sort(int *arr, int n)
 {
-	printf("Sorting array with cocktail shaker sort...\n\n");
+    printf("Sorting array with cocktail shaker sort...\n\n");
     statistics_t ret = {0};
     uint64_t start_time = microsSinceEpoch();
 
@@ -16,9 +16,7 @@ statistics_t cocktail_shaker_sort(int *arr, int n)
             if(*(arr + i) > *(arr + i + 1))
             {
                 // Swap them
-                int tmp = *(arr + i);
-                *(arr + i) = *(arr + i + 1);
-                *(arr + i + 1) = tmp;
+                swap(arr + i, arr + i + 1);
                 ret.array_accesses += 4;
             }
         }
@@ -31,9 +29,7 @@ statistics_t cocktail_shaker_sort(int *arr, int n)
             if(*(arr + j) < * (arr + j - 1))
             {
                 // Swap them
-                int tmp = *(arr + j);
-                *(arr + j) = *(arr + j - 1);
-                *(arr + j - 1) = tmp;
+                swap(arr + j, arr + j - 1);
                 ret.array_accesses += 4;
             }
         }

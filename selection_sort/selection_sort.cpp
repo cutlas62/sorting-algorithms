@@ -25,10 +25,8 @@ statistics_t selection_sort(int *arr, int n)
         }
 
         // Move the minimum value to the curent 'i' position
-        int tmp = *(arr + i);
-        *(arr + i) = *(arr + min_index);
-        *(arr + min_index) = tmp;
-        ret.array_accesses = ret.array_accesses + 4;
+        swap(arr + i, arr + min_index);
+        ret.array_accesses += 4;
 
     }
 

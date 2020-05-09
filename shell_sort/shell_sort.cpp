@@ -18,9 +18,8 @@ statistics_t shell_sort(int *arr, int n)
                 ret.array_accesses += 2;
                 if (*(arr + j) < * (arr + j - gap))
                 {
-                    int tmp = *(arr + j);
-                    *(arr + j) = *(arr + j - gap);
-                    *(arr + j - gap) = tmp;
+                    // Swap them
+                    swap(arr + j, arr + j - gap);
                     ret.array_accesses += 4;
                 }
                 else
@@ -31,7 +30,6 @@ statistics_t shell_sort(int *arr, int n)
         }
 
     }
-
 
     ret.time = microsSinceEpoch() - start_t;
 
