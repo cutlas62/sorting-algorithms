@@ -6,6 +6,7 @@ statistics_t bitonic_sort(int *arr, int n)
 
     // https://en.wikipedia.org/wiki/Bitonic_sorter#/media/File:BitonicSort1.svg
 
+    printf("Sorting array with bitonic sort...\n\n");
     statistics_t ret = {0};
     uint64_t start_time = microsSinceEpoch();
 
