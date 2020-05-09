@@ -1,43 +1,39 @@
 #include "../utils.h"
 
+
 statistics_t shell_sort(int *arr, int n)
 {
     printf("Sorting array with shell sort...\n\n");
     statistics_t ret = {0};
     uint64_t start_t = microsSinceEpoch();
 
-    // Compare starting with gap = n/2 and follow Knuth's formula (gap = gap * 3 + 1 < n)
-    int max_gap = 0;
-    while(max_gap < n / 3)
+    for(int gap = n / 2; gap > 0; gap /= 2)
     {
-        max_gap = max_gap * 3 + 1;
-    }
-
-    for(int gap = 8; gap > 0; gap = gap / 2)
-    {
-        printf("gap = %d\n", gap);
-        print_array(arr, n);
-        for(int i = 0; i < gap; i++)
+        // Like insertion sort but within sublists of element separated 'gap' elements from each other, instead of always 1
+        for(int i = gap; i < n; i++)
         {
-
-            if(i + gap < n)
+            for(int j = i; j >= gap; j -= gap)
             {
-                if(*(arr + i) > *(arr + i + gap))
+                ret.comparisons++;
+                ret.array_accesses += 2;
+                if (*(arr + j) < * (arr + j - gap))
                 {
-                    int tmp = *(arr + i + gap);
-                    *(arr + i + gap) = *(arr + i);
-                    *(arr + i) = tmp;
+                    int tmp = *(arr + j);
+                    *(arr + j) = *(arr + j - gap);
+                    *(arr + j - gap) = tmp;
+                    ret.array_accesses += 4;
+                }
+                else
+                {
+                    break;
                 }
             }
         }
 
-
-
     }
 
 
-
-
     ret.time = microsSinceEpoch() - start_t;
+
     return ret;
 }
