@@ -22,7 +22,7 @@ statistics_t merge_sort(int *arr, int n);               // Done
 statistics_t quick_sort(int *arr, int n);               // Done
 statistics_t radix_sort(int *arr, int n);
 statistics_t selection_sort(int *arr, int n);           // Done
-statistics_t shell_sort(int *arr, int n);				// Done
+statistics_t shell_sort(int *arr, int n);               // Done
 
 
 
@@ -219,12 +219,37 @@ int main (int argc, char *argv[])
         statistics_t stats = {0};
         stats = sort_fun(&random_array[0], n_rows);
 
+
         if(verbose)
         {
             printf("Sorted array:\n");
             print_array(&random_array[0], n_rows);
             printf("\n");
         }
+
+        // Check that the array is indeed sorted
+        bool sorted = true;
+        for(int i = 1; i < n_rows; i++)
+        {
+            if(random_array[i - 1] > random_array[i])
+            {
+                sorted = false;
+                if(verbose)
+                {
+                    printf("\t%d [%d] > %d [%d]\n", random_array[i - 1], i - 1, random_array[i], i);
+                }
+            }
+        }
+        if(sorted)
+        {
+            printf("\nThe array is correctly sorted!\n");
+        }
+        else
+        {
+            printf("\nThe array is NOT sorted!\n");
+        }
+
+
 
         if(print_stats)
         {
@@ -233,6 +258,7 @@ int main (int argc, char *argv[])
             printf("\tArray accesses: %lu\n", stats.array_accesses);
             printf("\tComparisons : %lu\n", stats.comparisons);
         }
+
     }
     else
     {
