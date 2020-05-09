@@ -9,12 +9,12 @@ using namespace std;
 
 
 
-statistics_t bitonic_sort(int *arr, int n);             // In progress
+statistics_t bitonic_sort(int *arr, int n);             // Done
 statistics_t bubble_sort(int *arr, int n);              // Done
 statistics_t cocktail_shaker_sort(int *arr, int n);     // Done
 statistics_t gcc_std_sort(int *arr, int n);
 statistics_t gcc_std_stable_sort(int *arr, int n);
-statistics_t gnome_sort(int *arr, int n);
+statistics_t gnome_sort(int *arr, int n);               // In progress
 statistics_t gravity_sort(int *arr, int n);
 statistics_t heap_sort(int *arr, int n);
 statistics_t insertion_sort(int *arr, int n);           // Done
@@ -36,8 +36,8 @@ void usage (void)
     printf("Description: Test different sorting algorithms with generated test data\n");
     printf("Parameters:\n");
     printf("  -h, --help               Display this information\n");
-    printf("  -m, --mode <mode>        Sorting order\n");
-    printf("                             <mode> can be 'low_to_high' or 'high_to_low'. By default it's 'low_to_high'\n");
+    //printf("  -m, --mode <mode>        Sorting order\n");
+    //printf("                             <mode> can be 'low_to_high' or 'high_to_low'. By default it's 'low_to_high'\n");
     printf("  -f, --file               Input file with random data to sort. This file has to be in test_data/\n");
     printf("  -v, --verbose            Display both the unsorted and sorted data\n");
     printf("  -s, --stats              Display algorithms statistics\n");
@@ -69,6 +69,7 @@ int main (int argc, char *argv[])
                 usage();
                 return 0;
             }
+            /*
             else if((arg == "-m") || (arg == "--mode"))
             {
                 // Check that there are more parameters
@@ -82,6 +83,7 @@ int main (int argc, char *argv[])
                     }
                 }
             }
+            */
             else if((arg == "-f") || (arg == "--file"))
             {
                 // Check that there are more parameters
