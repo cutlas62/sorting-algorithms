@@ -12,15 +12,15 @@ using namespace std;
 statistics_t bitonic_sort(int *arr, int n);             // Done
 statistics_t bubble_sort(int *arr, int n);              // Done
 statistics_t cocktail_shaker_sort(int *arr, int n);     // Done
-statistics_t gcc_std_sort(int *arr, int n);
+statistics_t gcc_std_sort(int *arr, int n);             // In progress
 statistics_t gcc_std_stable_sort(int *arr, int n);
 statistics_t gnome_sort(int *arr, int n);               // Done
 statistics_t gravity_sort(int *arr, int n);             // Done
-statistics_t heap_sort(int *arr, int n);
+statistics_t heap_sort(int *arr, int n);                
 statistics_t insertion_sort(int *arr, int n);           // Done
 statistics_t merge_sort(int *arr, int n);               // Done
 statistics_t quick_sort(int *arr, int n);               // Done
-statistics_t radix_sort(int *arr, int n);               // In progress
+statistics_t radix_sort(int *arr, int n);               // Done
 statistics_t selection_sort(int *arr, int n);           // Done
 statistics_t shell_sort(int *arr, int n);               // Done
 
