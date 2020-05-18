@@ -58,7 +58,7 @@ int main (int argc, char *argv[])
     bool verbose = false;
     bool print_stats = false;
 
-    // ser input overrides default values
+    // User input overrides default values
     if(argc > 1)
     {
         for (int i = 1; i < argc; ++i)
