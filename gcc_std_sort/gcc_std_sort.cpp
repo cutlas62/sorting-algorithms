@@ -2,7 +2,7 @@
 #include <cmath>
 #include <bits/stdc++.h>
 
-#define THRESHOLD 16
+#define THRESHOLD 160
 
 
 /* Function prototypes */
@@ -145,8 +145,10 @@ void _sort(int *arr, int _first, int _last)
 {
     if (_first != _last)
     {
+    	// Heap or quick sort if the number of elements is above THRESHOLD
         _introsort_loop(arr, _first, _last, 2 * _log2((_last - _first)));
-        _final_insertion_sort(arr, _first, _last);
+        // Else, normal insertion sort
+        _insertion_sort(arr, _first, _last);
     }
 }
 
@@ -262,13 +264,13 @@ void _introsort_loop(int *arr, int _first, int _last, int _depth_limit)
     while (_last - _first > THRESHOLD)
     {
         if (_depth_limit == 0)
-        {
+        { // If the depth is 0, use heap sort
             //_partial_sort(arr, _first, _last, _last);
-            std::make_heap(arr + _first, arr + _last);
-            std::sort_heap(arr + _first, arr + _last);
+            std::make_heap(arr + _first, arr + _last + 1);
+            std::sort_heap(arr + _first, arr + _last + 1);
             return;
         }
-
+        // Find pivot and perform quick sort
         --_depth_limit;
         pivot = _unguarded_partition_pivot(arr, _first, _last);
         _introsort_loop(arr, pivot, _last, _depth_limit);
