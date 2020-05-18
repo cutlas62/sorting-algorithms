@@ -1,6 +1,6 @@
 #include "../utils.h"
 #include <cmath>
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
 
 #define THRESHOLD 16
 
@@ -8,16 +8,16 @@
 /* Function prototypes */
 
 // Heap functions
-void _make_heap(int *arr, int _first, int _last);
-void _adjust_heap(int *arr, int _first, int _hole, int _len, int _val);
-void _push_heap(int *arr, int _first, int _hole, int _top, int _val);
-void _pop_heap(int *arr, int _first, int _last, int _result);
-void _sort_heap (int *arr, int _first, int _last);
-void _select_heap(int *arr, int _first, int _middle, int _last);
+//void _make_heap(int *arr, int _first, int _last);
+//void _adjust_heap(int *arr, int _first, int _hole, int _len, int _val);
+//void _push_heap(int *arr, int _first, int _hole, int _top, int _val);
+//void _pop_heap(int *arr, int _first, int _last, int _result);
+//void _sort_heap (int *arr, int _first, int _last);
+//void _select_heap(int *arr, int _first, int _middle, int _last);
 
 // Sorts
 void _sort(int *arr, int _first, int _last);
-void _partial_sort(int *arr, int _first, int _middle, int _last);
+//void _partial_sort(int *arr, int _first, int _middle, int _last);
 void _insertion_sort(int *arr, int _first, int _last);
 void _final_insertion_sort(int *arr, int _first, int _last);
 void _unguarded_insertion_sort(int *arr, int _first, int _last);
@@ -40,6 +40,7 @@ double _log2 (double n);
 
 
 // Heap functions
+/*
 void _make_heap(int *arr, int _first, int _last)
 {
     int len = _last - _first;;
@@ -136,7 +137,7 @@ void _select_heap(int *arr, int _first, int _middle, int _last)
         }
     }
 }
-
+*/
 
 
 // Sorts
@@ -144,18 +145,18 @@ void _sort(int *arr, int _first, int _last)
 {
     if (_first != _last)
     {
-        _introsort_loop(arr, _first, _last, _log2((double)(_last - _first)) * 2);
+        _introsort_loop(arr, _first, _last, 2 * _log2((_last - _first)));
         _final_insertion_sort(arr, _first, _last);
     }
 }
 
-
+/*
 void _partial_sort(int *arr, int _first, int _middle, int _last)
 {
     _select_heap(arr, _first, _middle, _last);
     _sort_heap(arr, _first, _middle);
 }
-
+*/
 
 void _insertion_sort(int *arr, int _first, int _last)
 {
@@ -257,12 +258,14 @@ void _unguarded_linear_insert(int *arr, int _last)
 void _introsort_loop(int *arr, int _first, int _last, int _depth_limit)
 {
     int pivot = 0;
-    int size = _last - _first;
+
     while (_last - _first > THRESHOLD)
     {
         if (_depth_limit == 0)
         {
-            _partial_sort(arr, _first, _last, _last);
+            //_partial_sort(arr, _first, _last, _last);
+            std::make_heap(arr + _first, arr + _last);
+            std::sort_heap(arr + _first, arr + _last);
             return;
         }
 
@@ -333,8 +336,8 @@ statistics_t gcc_std_sort(int *arr, int n)
     statistics_t ret = {0};
     uint64_t start_t = microsSinceEpoch();
 
-    
-    _insertion_sort(arr, 0, n);
+
+    _sort(arr, 0, n);
 
 
     ret.time = microsSinceEpoch() - start_t;
