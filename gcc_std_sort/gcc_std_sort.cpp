@@ -1,8 +1,8 @@
 #include "../utils.h"
 #include <cmath>
+#include <bits/stdc++.h> 
 
-
-#define THRESHOLD 256
+#define THRESHOLD 10000000
 
 
 /* Function prototypes */
@@ -256,7 +256,7 @@ void _unguarded_linear_insert(int *arr, int _last)
 
 void _introsort_loop(int *arr, int _first, int _last, int _depth_limit)
 {
-    int pivot = 0;;
+    int pivot = 0;
     while (_last - _first > THRESHOLD)
     {
         if (_depth_limit == 0)
@@ -332,8 +332,8 @@ statistics_t gcc_std_sort(int *arr, int n)
     statistics_t ret = {0};
     uint64_t start_t = microsSinceEpoch();
 
-
-    _sort(arr, 0, n);
+    std::sort(arr, arr + n);
+    //_sort(arr, 0, n);
 
 
     ret.time = microsSinceEpoch() - start_t;
