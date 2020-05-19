@@ -2,24 +2,23 @@
 #include <cmath>
 #include <bits/stdc++.h>
 
-#define THRESHOLD 160
+#define THRESHOLD 16
 
 
 /* Function prototypes */
 
 // Heap functions
-//void _make_heap(int *arr, int _first, int _last);
-//void _adjust_heap(int *arr, int _first, int _hole, int _len, int _val);
-//void _push_heap(int *arr, int _first, int _hole, int _top, int _val);
-//void _pop_heap(int *arr, int _first, int _last, int _result);
-//void _sort_heap (int *arr, int _first, int _last);
-//void _select_heap(int *arr, int _first, int _middle, int _last);
+void _make_heap(int *arr, int _first, int _last);
+void _adjust_heap(int *arr, int _first, int _hole, int _len, int _val);
+void _push_heap(int *arr, int _first, int _hole, int _top, int _val);
+void _pop_heap(int *arr, int _first, int _last, int _result);
+void _sort_heap (int *arr, int _first, int _last);
+void _select_heap(int *arr, int _first, int _middle, int _last);
 
 // Sorts
 void _sort(int *arr, int _first, int _last);
-//void _partial_sort(int *arr, int _first, int _middle, int _last);
+void _partial_sort(int *arr, int _first, int _middle, int _last);
 void _insertion_sort(int *arr, int _first, int _last);
-void _final_insertion_sort(int *arr, int _first, int _last);
 void _unguarded_insertion_sort(int *arr, int _first, int _last);
 void _introsort_loop(int *arr, int _first, int _last, int _depth_limit);
 
@@ -34,15 +33,32 @@ double _log2 (double n);
 
 
 
+static int _make_heap_n;
+static int _adjust_heap_n;
+static int _push_heap_n;
+static int _pop_heap_n;
+static int _sort_heap_n;
+static int _select_heap_n;
+static int _sort_n;
+static int _partial_sort_n;
+static int _insertion_sort_n;
+static int _unguarded_insertion_sort_n;
+static int _introsort_loop_n;
+static int _unguarded_partition_pivot_n;
+static int _unguarded_partition_n;
+static int _unguarded_linear_insert_n;
+static int _move_median_to_first_n;
+static int _move_backwards_n;
+static int _log2_n;
 
-
+static statistics_t *st;
 
 
 
 // Heap functions
-/*
 void _make_heap(int *arr, int _first, int _last)
 {
+    _make_heap_n++;
     int len = _last - _first;;
     if (len < 2)
     {
@@ -53,6 +69,7 @@ void _make_heap(int *arr, int _first, int _last)
     int val = 0;
     while (1)
     {
+        st->array_accesses++;
         val = *(arr + _first + parent);
         _adjust_heap(arr, _first, parent, len, val);
         if (parent == 0)
@@ -65,17 +82,21 @@ void _make_heap(int *arr, int _first, int _last)
 
 void _adjust_heap(int *arr, int _first, int _hole, int _len, int _val)
 {
+    _adjust_heap_n++;
     int top = _hole;
     int child = _hole;
 
     while (child < (_len - 1) / 2)
     {
         child = 2 * (child + 1);
+        st->array_accesses += 2;
+        st->comparisons++;
         if (*(arr + _first + child) < * (arr + _first + (child - 1)))
         {
             child--;
         }
 
+        st->array_accesses += 2;
         *(arr + _first + _hole) = *(arr + _first + child);
         _hole = child;
     }
@@ -83,6 +104,7 @@ void _adjust_heap(int *arr, int _first, int _hole, int _len, int _val)
     if ((_len & 1) == 0 && child == (_len - 2) / 2)
     {
         child = 2 * (child + 1);
+        st->array_accesses += 2;
         *(arr + _first + _hole) = *(arr + _first + (child - 1));
         _hole = child - 1;
     }
@@ -93,6 +115,8 @@ void _adjust_heap(int *arr, int _first, int _hole, int _len, int _val)
 
 void _pop_heap(int *arr, int _first, int _last, int _result)
 {
+    _pop_heap_n++;
+    st->array_accesses += 3;
     int tmp = *(arr + _result);
     *(arr + _result) = *(arr + _first);
     _adjust_heap(arr, _first, 0, _last - _first, tmp);
@@ -101,19 +125,24 @@ void _pop_heap(int *arr, int _first, int _last, int _result)
 
 void _push_heap(int *arr, int _first, int _hole, int _top, int _val)
 {
+    _push_heap_n++;
     int parent = (_hole - 1) / 2;
+    st->comparisons += 2;
     while (_hole > _top && (*(arr + _first + parent) < _val))
     {
+        st->array_accesses += 3;
         *(arr + _first + _hole) = *(arr + _first + parent);
         _hole = parent;
         parent = (_hole - 1) / 2;
     }
     *(arr + _first + _hole) = _val;
+    st->array_accesses++;
 }
 
 
 void _sort_heap (int *arr, int _first, int _last)
 {
+    _sort_heap_n++;
     while (_last - _first > 1)
     {
         --_last;
@@ -127,42 +156,46 @@ void _sort_heap (int *arr, int _first, int _last)
 
 void _select_heap(int *arr, int _first, int _middle, int _last)
 {
-    int i;
+    _select_heap_n++;
     _make_heap(arr, _first, _middle);
-    for (i = _middle; i < _last; i++)
+    for (int i = _middle; i < _last; i++)
     {
+        st->comparisons += 2;
+        st->array_accesses += 2;
         if ((*arr + i) < * (arr + _first))
         {
             _pop_heap(arr, _first, _middle, i);
         }
     }
 }
-*/
+
 
 
 // Sorts
 void _sort(int *arr, int _first, int _last)
 {
+    _sort_n++;
     if (_first != _last)
     {
-    	// Heap or quick sort if the number of elements is above THRESHOLD
+        // Heap or quick sort if the number of elements is above THRESHOLD
         _introsort_loop(arr, _first, _last, 2 * _log2((_last - _first)));
         // Else, normal insertion sort
         _insertion_sort(arr, _first, _last);
     }
 }
 
-/*
+
 void _partial_sort(int *arr, int _first, int _middle, int _last)
 {
+    _partial_sort_n++;
     _select_heap(arr, _first, _middle, _last);
     _sort_heap(arr, _first, _middle);
 }
-*/
+
 
 void _insertion_sort(int *arr, int _first, int _last)
 {
-
+    _insertion_sort_n++;
     if (_first == _last)
     {
         return;
@@ -171,11 +204,14 @@ void _insertion_sort(int *arr, int _first, int _last)
     int val = 0;
     for (int i = _first + 1; i != _last; i++)
     {
+        st->array_accesses += 2;
+        st->comparisons++;
         if (*(arr + i) < * (arr + _first))
         {
             val = *(arr + i);
             _move_backwards(arr, _first, i, i + 1);
             *(arr + _first) = val;
+            st->array_accesses += 2;
         }
         else
         {
@@ -185,22 +221,9 @@ void _insertion_sort(int *arr, int _first, int _last)
 }
 
 
-void _final_insertion_sort(int *arr, int _first, int _last)
-{
-    if (_last - _first > THRESHOLD)
-    {
-        _insertion_sort(arr, _first, _last + THRESHOLD);
-        _unguarded_insertion_sort(arr, _first + THRESHOLD, _last);
-    }
-    else
-    {
-        _insertion_sort(arr, _first, _last);
-    }
-}
-
-
 void _unguarded_insertion_sort(int *arr, int _first, int _last)
 {
+    _unguarded_insertion_sort_n++;
     for (int i = _first; i != _last; i++)
     {
         _unguarded_linear_insert(arr, i);
@@ -213,6 +236,7 @@ void _unguarded_insertion_sort(int *arr, int _first, int _last)
 // Utils
 int _unguarded_partition_pivot(int *arr, int _first, int _last)
 {
+    _unguarded_partition_pivot_n++;
     int mid = _first + (_last - _first) / 2;
     _move_median_to_first(arr, _first, _first + 1, mid, _last - 1);
     return _unguarded_partition(arr, _first + 1, _last, _first);
@@ -221,21 +245,32 @@ int _unguarded_partition_pivot(int *arr, int _first, int _last)
 
 int _unguarded_partition(int *arr, int _first, int _last, int _pivot)
 {
+    _unguarded_partition_n++;
     while(1)
     {
+        st->array_accesses += 2;
+        st->comparisons++;
         while(*(arr + _first) < * (arr + _pivot))
         {
             _first++;
+            st->array_accesses += 2;
+            st->comparisons++;
         }
         _last--;
+        st->array_accesses += 2;
+        st->comparisons++;
         while(*(arr + _pivot) < * (arr + _last))
         {
             _last--;
+            st->array_accesses += 2;
+            st->comparisons++;
         }
+        st->comparisons++;
         if (!(_first < _last))
         {
             return _first;
         }
+        st->array_accesses += 3;
         swap(arr + _first, arr + _last);
         _first++;
     }
@@ -244,30 +279,36 @@ int _unguarded_partition(int *arr, int _first, int _last, int _pivot)
 
 void _unguarded_linear_insert(int *arr, int _last)
 {
+    _unguarded_linear_insert_n++;
+    st->array_accesses++;
     int val = *(arr + _last);
-    int next = _last;
-    --next;
+    int next = _last - 1;
+    st->array_accesses++;
+    st->comparisons++;
     while (val < * (arr + next))
     {
         *(arr + _last) = *(arr + next);
         _last = next;
         --next;
+        st->array_accesses += 3;
+        st->comparisons++;
     }
+    st->array_accesses++;
     *(arr + _last) = val;
 }
 
 
 void _introsort_loop(int *arr, int _first, int _last, int _depth_limit)
 {
+    _introsort_loop_n++;
     int pivot = 0;
 
     while (_last - _first > THRESHOLD)
     {
         if (_depth_limit == 0)
-        { // If the depth is 0, use heap sort
-            //_partial_sort(arr, _first, _last, _last);
-            std::make_heap(arr + _first, arr + _last + 1);
-            std::sort_heap(arr + _first, arr + _last + 1);
+        {
+            // If the depth is 0, use heap sort
+            _partial_sort(arr, _first, _last, _last);
             return;
         }
         // Find pivot and perform quick sort
@@ -281,31 +322,45 @@ void _introsort_loop(int *arr, int _first, int _last, int _depth_limit)
 
 void _move_median_to_first(int *arr, int _result, int _a, int _b, int _c)
 {
+    _move_median_to_first_n++;
     if (*(arr + _a) < * (arr + _b))
     {
+        st->comparisons++;
         if (*(arr + _b) < * (arr + _c))
         {
+            st->comparisons++;
+            st->array_accesses += 5;
             swap(arr + _result, arr + _b);
         }
         else if (*(arr + _a) < * (arr + _c))
         {
+            st->comparisons += 2;
+            st->array_accesses += 6;
             swap(arr + _result, arr + _c);
         }
         else
         {
+            st->comparisons += 2;
+            st->array_accesses += 6;
             swap(arr + _result, arr + _a);
         }
     }
     else if (*(arr + _a) < * (arr + _c))
     {
+        st->comparisons += 2;
+        st->array_accesses += 5;
         swap(arr + _result, arr + _a);
     }
     else if (*(arr + _b) < * (arr + _c))
     {
+        st->comparisons += 3;
+        st->array_accesses += 6;
         swap(arr + _result, arr + _c);
     }
     else
     {
+        st->comparisons += 3;
+        st->array_accesses += 6;
         swap(arr + _result, arr + _b);
     }
 }
@@ -313,10 +368,12 @@ void _move_median_to_first(int *arr, int _result, int _a, int _b, int _c)
 
 void _move_backwards(int *arr, int _first, int _last, int _dlast)
 {
+    _move_backwards_n++;
     while (_first != _last)
     {
         _dlast--;
         _last--;
+        st->array_accesses += 2;
         *(arr + _dlast) = *(arr + _last);
     }
 }
@@ -324,6 +381,7 @@ void _move_backwards(int *arr, int _first, int _last, int _dlast)
 
 double _log2 (double n)
 {
+    _log2_n++;
     return log(n) / log(2.0);
 }
 
@@ -332,16 +390,52 @@ double _log2 (double n)
 
 statistics_t gcc_std_sort(int *arr, int n)
 {
+    _make_heap_n = 0;
+    _adjust_heap_n = 0;
+    _push_heap_n = 0;
+    _pop_heap_n = 0;
+    _sort_heap_n = 0;
+    _select_heap_n = 0;
+    _sort_n = 0;
+    _partial_sort_n = 0;
+    _insertion_sort_n = 0;
+    _unguarded_insertion_sort_n = 0;
+    _introsort_loop_n = 0;
+    _unguarded_partition_pivot_n = 0;
+    _unguarded_partition_n = 0;
+    _unguarded_linear_insert_n = 0;
+    _move_median_to_first_n = 0;
+    _move_backwards_n = 0;
+    _log2_n = 0;
+
     // https://github.com/gcc-mirror/gcc/blob/d9375e490072d1aae73a93949aa158fcd2a27018/libstdc%2B%2B-v3/include/bits/stl_algo.h#L1950
 
     printf("Sorting array with gcc_std sort...\n\n");
-    statistics_t ret = {0};
+    st = new statistics_t;
     uint64_t start_t = microsSinceEpoch();
-
 
     _sort(arr, 0, n);
 
+    printf("\n");
+    printf("_make_heap_n = %d\n", _make_heap_n);
+    printf("_adjust_heap_n = %d\n", _adjust_heap_n);
+    printf("_push_heap_n = %d\n", _push_heap_n);
+    printf("_pop_heap_n = %d\n", _pop_heap_n);
+    printf("_sort_heap_n = %d\n", _sort_heap_n);
+    printf("_select_heap_n = %d\n", _select_heap_n);
+    printf("_sort_n = %d\n", _sort_n);
+    printf("_partial_sort_n = %d\n", _partial_sort_n);
+    printf("_insertion_sort_n = %d\n", _insertion_sort_n);
+    printf("_unguarded_insertion_sort_n = %d\n", _unguarded_insertion_sort_n);
+    printf("_introsort_loop_n = %d\n", _introsort_loop_n);
+    printf("_unguarded_partition_pivot_n = %d\n", _unguarded_partition_pivot_n);
+    printf("_unguarded_partition_n = %d\n", _unguarded_partition_n);
+    printf("_unguarded_linear_insert_n = %d\n", _unguarded_linear_insert_n);
+    printf("_move_median_to_first_n = %d\n", _move_median_to_first_n);
+    printf("_move_backwards_n = %d\n", _move_backwards_n);
+    printf("_log2_n = %d\n", _log2_n);
 
+    statistics_t ret = *st;
     ret.time = microsSinceEpoch() - start_t;
     return ret;
 }
