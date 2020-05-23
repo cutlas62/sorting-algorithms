@@ -19,7 +19,7 @@ void _select_heap(int *arr, int _first, int _middle, int _last);
 void _sort(int *arr, int _first, int _last);
 void _partial_sort(int *arr, int _first, int _middle, int _last);
 void _insertion_sort(int *arr, int _first, int _last);
-void _unguarded_insertion_sort(int *arr, int _first, int _last);
+//void _unguarded_insertion_sort(int *arr, int _first, int _last);
 void _introsort_loop(int *arr, int _first, int _last, int _depth_limit);
 
 
@@ -42,7 +42,7 @@ static int _select_heap_n;
 static int _sort_n;
 static int _partial_sort_n;
 static int _insertion_sort_n;
-static int _unguarded_insertion_sort_n;
+//static int _unguarded_insertion_sort_n;
 static int _introsort_loop_n;
 static int _unguarded_partition_pivot_n;
 static int _unguarded_partition_n;
@@ -220,7 +220,7 @@ void _insertion_sort(int *arr, int _first, int _last)
     }
 }
 
-
+/*
 void _unguarded_insertion_sort(int *arr, int _first, int _last)
 {
     _unguarded_insertion_sort_n++;
@@ -229,7 +229,7 @@ void _unguarded_insertion_sort(int *arr, int _first, int _last)
         _unguarded_linear_insert(arr, i);
     }
 }
-
+*/
 
 
 
@@ -399,7 +399,7 @@ statistics_t gcc_std_sort(int *arr, int n)
     _sort_n = 0;
     _partial_sort_n = 0;
     _insertion_sort_n = 0;
-    _unguarded_insertion_sort_n = 0;
+    //_unguarded_insertion_sort_n = 0;
     _introsort_loop_n = 0;
     _unguarded_partition_pivot_n = 0;
     _unguarded_partition_n = 0;
@@ -426,7 +426,7 @@ statistics_t gcc_std_sort(int *arr, int n)
     printf("_sort_n = %d\n", _sort_n);
     printf("_partial_sort_n = %d\n", _partial_sort_n);
     printf("_insertion_sort_n = %d\n", _insertion_sort_n);
-    printf("_unguarded_insertion_sort_n = %d\n", _unguarded_insertion_sort_n);
+    //printf("_unguarded_insertion_sort_n = %d\n", _unguarded_insertion_sort_n);
     printf("_introsort_loop_n = %d\n", _introsort_loop_n);
     printf("_unguarded_partition_pivot_n = %d\n", _unguarded_partition_pivot_n);
     printf("_unguarded_partition_n = %d\n", _unguarded_partition_n);
