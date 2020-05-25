@@ -40,6 +40,7 @@ statistics_t counting_sort(int *arr, int n)
     int counting_array [max_val + 1] = {0};
 
     // Count how many times a value appears
+    ret.array_accesses++;
     for(int i = 0; i < n; i++)
     {
         counting_array[*(arr + i)]++;
@@ -52,6 +53,7 @@ statistics_t counting_sort(int *arr, int n)
     {
         for(int j = 0; j < counting_array[i]; j++)
         {
+        	ret.array_accesses++;
             *(arr + index++) = i;
         }
     }

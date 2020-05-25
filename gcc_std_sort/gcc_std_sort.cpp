@@ -1,29 +1,21 @@
 #include "../utils.h"
 #include <cmath>
-#include <bits/stdc++.h>
 
 #define THRESHOLD 16
 
 
 /* Function prototypes */
 
-// Heap functions
 void _make_heap(int *arr, int _first, int _last);
 void _adjust_heap(int *arr, int _first, int _hole, int _len, int _val);
 void _push_heap(int *arr, int _first, int _hole, int _top, int _val);
 void _pop_heap(int *arr, int _first, int _last, int _result);
 void _sort_heap (int *arr, int _first, int _last);
 void _select_heap(int *arr, int _first, int _middle, int _last);
-
-// Sorts
 void _sort(int *arr, int _first, int _last);
-void _partial_sort(int *arr, int _first, int _middle, int _last);
 void _insertion_sort(int *arr, int _first, int _last);
-//void _unguarded_insertion_sort(int *arr, int _first, int _last);
+void _partial_sort(int *arr, int _first, int _middle, int _last);
 void _introsort_loop(int *arr, int _first, int _last, int _depth_limit);
-
-
-// Utils
 int _unguarded_partition_pivot(int *arr, int _first, int _last);
 int _unguarded_partition(int *arr, int _first, int _last, int _pivot);
 void _unguarded_linear_insert(int *arr, int _last);
@@ -31,31 +23,9 @@ void _move_median_to_first(int *arr, int _result, int _a, int _b, int _c);
 void _move_backwards(int *arr, int _first, int _last, int _dlast);
 double _log2 (double n);
 
-
-
-static int _make_heap_n;
-static int _adjust_heap_n;
-static int _push_heap_n;
-static int _pop_heap_n;
-static int _sort_heap_n;
-static int _select_heap_n;
-static int _sort_n;
-static int _partial_sort_n;
-static int _insertion_sort_n;
-//static int _unguarded_insertion_sort_n;
-static int _introsort_loop_n;
-static int _unguarded_partition_pivot_n;
-static int _unguarded_partition_n;
-static int _unguarded_linear_insert_n;
-static int _move_median_to_first_n;
-static int _move_backwards_n;
-static int _log2_n;
-
 static statistics_t *st;
 
 
-
-// Heap functions
 void _make_heap(int *arr, int _first, int _last)
 {
     _make_heap_n++;
@@ -151,9 +121,6 @@ void _sort_heap (int *arr, int _first, int _last)
 }
 
 
-
-
-
 void _select_heap(int *arr, int _first, int _middle, int _last)
 {
     _select_heap_n++;
@@ -170,8 +137,6 @@ void _select_heap(int *arr, int _first, int _middle, int _last)
 }
 
 
-
-// Sorts
 void _sort(int *arr, int _first, int _last)
 {
     _sort_n++;
@@ -220,20 +185,7 @@ void _insertion_sort(int *arr, int _first, int _last)
     }
 }
 
-/*
-void _unguarded_insertion_sort(int *arr, int _first, int _last)
-{
-    _unguarded_insertion_sort_n++;
-    for (int i = _first; i != _last; i++)
-    {
-        _unguarded_linear_insert(arr, i);
-    }
-}
-*/
 
-
-
-// Utils
 int _unguarded_partition_pivot(int *arr, int _first, int _last)
 {
     _unguarded_partition_pivot_n++;
@@ -390,24 +342,6 @@ double _log2 (double n)
 
 statistics_t gcc_std_sort(int *arr, int n)
 {
-    _make_heap_n = 0;
-    _adjust_heap_n = 0;
-    _push_heap_n = 0;
-    _pop_heap_n = 0;
-    _sort_heap_n = 0;
-    _select_heap_n = 0;
-    _sort_n = 0;
-    _partial_sort_n = 0;
-    _insertion_sort_n = 0;
-    //_unguarded_insertion_sort_n = 0;
-    _introsort_loop_n = 0;
-    _unguarded_partition_pivot_n = 0;
-    _unguarded_partition_n = 0;
-    _unguarded_linear_insert_n = 0;
-    _move_median_to_first_n = 0;
-    _move_backwards_n = 0;
-    _log2_n = 0;
-
     // https://github.com/gcc-mirror/gcc/blob/d9375e490072d1aae73a93949aa158fcd2a27018/libstdc%2B%2B-v3/include/bits/stl_algo.h#L1950
 
     printf("Sorting array with gcc_std sort...\n\n");
@@ -415,25 +349,6 @@ statistics_t gcc_std_sort(int *arr, int n)
     uint64_t start_t = microsSinceEpoch();
 
     _sort(arr, 0, n);
-
-    printf("\n");
-    printf("_make_heap_n = %d\n", _make_heap_n);
-    printf("_adjust_heap_n = %d\n", _adjust_heap_n);
-    printf("_push_heap_n = %d\n", _push_heap_n);
-    printf("_pop_heap_n = %d\n", _pop_heap_n);
-    printf("_sort_heap_n = %d\n", _sort_heap_n);
-    printf("_select_heap_n = %d\n", _select_heap_n);
-    printf("_sort_n = %d\n", _sort_n);
-    printf("_partial_sort_n = %d\n", _partial_sort_n);
-    printf("_insertion_sort_n = %d\n", _insertion_sort_n);
-    //printf("_unguarded_insertion_sort_n = %d\n", _unguarded_insertion_sort_n);
-    printf("_introsort_loop_n = %d\n", _introsort_loop_n);
-    printf("_unguarded_partition_pivot_n = %d\n", _unguarded_partition_pivot_n);
-    printf("_unguarded_partition_n = %d\n", _unguarded_partition_n);
-    printf("_unguarded_linear_insert_n = %d\n", _unguarded_linear_insert_n);
-    printf("_move_median_to_first_n = %d\n", _move_median_to_first_n);
-    printf("_move_backwards_n = %d\n", _move_backwards_n);
-    printf("_log2_n = %d\n", _log2_n);
 
     statistics_t ret = *st;
     ret.time = microsSinceEpoch() - start_t;
