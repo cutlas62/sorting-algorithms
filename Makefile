@@ -5,17 +5,17 @@ OBJS = 	main.cpp \
 		bitonic_sort/bitonic_sort.cpp \
 		bubble_sort/bubble_sort.cpp \
 		cocktail_shaker_sort/cocktail_shaker_sort.cpp \
+		counting_sort/counting_sort.cpp \
 		gcc_std_sort/gcc_std_sort.cpp \
 		gnome_sort/gnome_sort.cpp \
+		gravity_sort/gravity_sort.cpp \
 		heap_sort/heap_sort.cpp \
+		insertion_sort/insertion_sort.cpp \
 		merge_sort/merge_sort.cpp \
 		radix_sort/radix_sort.cpp \
+		selection_sort/selection_sort.cpp \
 		shell_sort/shell_sort.cpp \
-		gcc_std_stable_sort/gcc_std_stable_sort.cpp \
-		gravity_sort/gravity_sort.cpp \
-		insertion_sort/insertion_sort.cpp \
-		quick_sort/quick_sort.cpp \
-		selection_sort/selection_sort.cpp
+		quick_sort/quick_sort.cpp 
 CFLAG = -Wall -g
 CC = g++
 STD = -std=c++11

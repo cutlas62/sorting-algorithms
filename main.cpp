@@ -12,8 +12,8 @@ using namespace std;
 statistics_t bitonic_sort(int *arr, int n);             // Done
 statistics_t bubble_sort(int *arr, int n);              // Done
 statistics_t cocktail_shaker_sort(int *arr, int n);     // Done
+statistics_t counting_sort(int *arr, int n);            // In progress
 statistics_t gcc_std_sort(int *arr, int n);             // Done, will need refactor in the future
-statistics_t gcc_std_stable_sort(int *arr, int n);      // In progress
 statistics_t gnome_sort(int *arr, int n);               // Done
 statistics_t gravity_sort(int *arr, int n);             // Done
 statistics_t heap_sort(int *arr, int n);                // Done
@@ -125,13 +125,13 @@ int main (int argc, char *argv[])
                     {
                         sort_fun = &cocktail_shaker_sort;
                     }
+                    else if (sorting_alg == "counting")
+                    {
+                        sort_fun = &counting_sort;
+                    }
                     else if (sorting_alg == "gcc_std")
                     {
                         sort_fun = &gcc_std_sort;
-                    }
-                    else if (sorting_alg == "gcc_std_stable")
-                    {
-                        sort_fun = &gcc_std_stable_sort;
                     }
                     else if (sorting_alg == "gnome")
                     {
