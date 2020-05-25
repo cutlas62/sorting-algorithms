@@ -16,6 +16,7 @@ void usage (void)
     printf("Parameters:\n");
     printf("  -h, --help   Show this help information\n");
     printf("  -n <nrows>   Number of rows to create\n");
+    printf("  -l <limit>   Maximum limit for the numbers\n");
     printf("  -m <mode>    Randomness mode\n");
     printf("           <mode>:\n");
     printf("           random           Totally random order\n");
@@ -31,6 +32,7 @@ int main (int argc, char *argv[])
     string mode = "random";
     string n_rows = to_string(5000);
     string file_extension = ".txt";
+    string max_val = to_string(INT_MAX);
 
     // User input overrides default values
     if(argc > 1)
@@ -42,6 +44,35 @@ int main (int argc, char *argv[])
             {
                 usage();
                 return 0;
+            }
+            else if (arg == "-l")
+            {
+                // Check that there are more parameters
+                if(i + 1 < argc)
+                {
+                    max_val = argv[++i];
+                    try
+                    {
+                        if(stoi(max_val) <= 0)
+                        {
+                            printf("Bad parameter, <max_val> has to be a positive number\n");
+                            return -1;
+                        }
+
+                    }
+                    catch (invalid_argument const &e)
+                    {
+                        printf("Bad parameter, <max_val> has to be a positive number\n");
+                        return -1;
+                    }
+                    catch (out_of_range const &e)
+                    {
+                        printf("Bad parameter, <max_val> has to be lower than %d\n", INT_MAX);
+                        return -1;
+                    }
+
+                }
+
             }
             else if ((arg == "-n") || (arg == "--number"))
             {
@@ -108,24 +139,25 @@ int main (int argc, char *argv[])
 
     ofstream random_file;
     random_file.open (file_name);
-    int max_rows = stoi(n_rows);
+    int _max_rows = stoi(n_rows);
+    int _max_val = stoi(max_val);
 
     // Let's start each file with the number of elements it contains
-    random_file << max_rows;
+    random_file << _max_rows;
 
     if(mode == "random")
     {
-        printf("Generating %d random values between 0 and %d...\n", max_rows, RAND_MAX);
-        for(int i = 0; i < max_rows; i++)
+        printf("Generating %d random values between 0 and %d...\n", _max_rows, _max_val);
+        for(int i = 0; i < _max_rows; i++)
         {
-            random_file << endl << rand();
+            random_file << endl << rand() % _max_val;
         }
 
     }
     else if(mode == "low_to_high")
     {
-        printf("Generating %d values between 0 and %d from low to high...\n", max_rows, max_rows - 1);
-        for(int i = 0; i < max_rows; i++)
+        printf("Generating %d values between 0 and %d from low to high...\n", _max_rows, _max_rows - 1);
+        for(int i = 0; i < _max_rows; i++)
         {
             random_file << endl << i;
         }
@@ -133,8 +165,8 @@ int main (int argc, char *argv[])
     }
     else if (mode == "high_to_low")
     {
-        printf("Generating %d values between 0 and %d from high to low...\n", max_rows, max_rows - 1);
-        for(int i = max_rows; i > 0; i--)
+        printf("Generating %d values between 0 and %d from high to low...\n", _max_rows, _max_rows - 1);
+        for(int i = _max_rows; i > 0; i--)
         {
             random_file << endl << i - 1;
         }
