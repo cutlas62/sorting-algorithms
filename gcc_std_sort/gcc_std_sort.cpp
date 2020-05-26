@@ -28,7 +28,6 @@ static statistics_t *st;
 
 void _make_heap(int *arr, int _first, int _last)
 {
-    _make_heap_n++;
     int len = _last - _first;;
     if (len < 2)
     {
@@ -52,7 +51,6 @@ void _make_heap(int *arr, int _first, int _last)
 
 void _adjust_heap(int *arr, int _first, int _hole, int _len, int _val)
 {
-    _adjust_heap_n++;
     int top = _hole;
     int child = _hole;
 
@@ -85,7 +83,6 @@ void _adjust_heap(int *arr, int _first, int _hole, int _len, int _val)
 
 void _pop_heap(int *arr, int _first, int _last, int _result)
 {
-    _pop_heap_n++;
     st->array_accesses += 3;
     int tmp = *(arr + _result);
     *(arr + _result) = *(arr + _first);
@@ -95,7 +92,6 @@ void _pop_heap(int *arr, int _first, int _last, int _result)
 
 void _push_heap(int *arr, int _first, int _hole, int _top, int _val)
 {
-    _push_heap_n++;
     int parent = (_hole - 1) / 2;
     st->comparisons += 2;
     while (_hole > _top && (*(arr + _first + parent) < _val))
@@ -112,7 +108,6 @@ void _push_heap(int *arr, int _first, int _hole, int _top, int _val)
 
 void _sort_heap (int *arr, int _first, int _last)
 {
-    _sort_heap_n++;
     while (_last - _first > 1)
     {
         --_last;
@@ -123,7 +118,6 @@ void _sort_heap (int *arr, int _first, int _last)
 
 void _select_heap(int *arr, int _first, int _middle, int _last)
 {
-    _select_heap_n++;
     _make_heap(arr, _first, _middle);
     for (int i = _middle; i < _last; i++)
     {
@@ -139,7 +133,6 @@ void _select_heap(int *arr, int _first, int _middle, int _last)
 
 void _sort(int *arr, int _first, int _last)
 {
-    _sort_n++;
     if (_first != _last)
     {
         // Heap or quick sort if the number of elements is above THRESHOLD
@@ -152,7 +145,6 @@ void _sort(int *arr, int _first, int _last)
 
 void _partial_sort(int *arr, int _first, int _middle, int _last)
 {
-    _partial_sort_n++;
     _select_heap(arr, _first, _middle, _last);
     _sort_heap(arr, _first, _middle);
 }
@@ -160,7 +152,6 @@ void _partial_sort(int *arr, int _first, int _middle, int _last)
 
 void _insertion_sort(int *arr, int _first, int _last)
 {
-    _insertion_sort_n++;
     if (_first == _last)
     {
         return;
@@ -188,7 +179,6 @@ void _insertion_sort(int *arr, int _first, int _last)
 
 int _unguarded_partition_pivot(int *arr, int _first, int _last)
 {
-    _unguarded_partition_pivot_n++;
     int mid = _first + (_last - _first) / 2;
     _move_median_to_first(arr, _first, _first + 1, mid, _last - 1);
     return _unguarded_partition(arr, _first + 1, _last, _first);
@@ -197,7 +187,6 @@ int _unguarded_partition_pivot(int *arr, int _first, int _last)
 
 int _unguarded_partition(int *arr, int _first, int _last, int _pivot)
 {
-    _unguarded_partition_n++;
     while(1)
     {
         st->array_accesses += 2;
@@ -231,7 +220,6 @@ int _unguarded_partition(int *arr, int _first, int _last, int _pivot)
 
 void _unguarded_linear_insert(int *arr, int _last)
 {
-    _unguarded_linear_insert_n++;
     st->array_accesses++;
     int val = *(arr + _last);
     int next = _last - 1;
@@ -252,7 +240,6 @@ void _unguarded_linear_insert(int *arr, int _last)
 
 void _introsort_loop(int *arr, int _first, int _last, int _depth_limit)
 {
-    _introsort_loop_n++;
     int pivot = 0;
 
     while (_last - _first > THRESHOLD)
@@ -274,7 +261,6 @@ void _introsort_loop(int *arr, int _first, int _last, int _depth_limit)
 
 void _move_median_to_first(int *arr, int _result, int _a, int _b, int _c)
 {
-    _move_median_to_first_n++;
     if (*(arr + _a) < * (arr + _b))
     {
         st->comparisons++;
@@ -320,7 +306,6 @@ void _move_median_to_first(int *arr, int _result, int _a, int _b, int _c)
 
 void _move_backwards(int *arr, int _first, int _last, int _dlast)
 {
-    _move_backwards_n++;
     while (_first != _last)
     {
         _dlast--;
@@ -333,7 +318,6 @@ void _move_backwards(int *arr, int _first, int _last, int _dlast)
 
 double _log2 (double n)
 {
-    _log2_n++;
     return log(n) / log(2.0);
 }
 
