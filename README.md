@@ -116,6 +116,27 @@ So,
 
 ## Time complexity analysis
 
+The whole time complexity study and all these graphs were run on an AMD Ryzen 9 4900HS single core.
+
+### O(kn)
+
+Counting and Radix sort top the list when it comes to low execution times, but this comes at a price
+
+Counting sort needs the maximum element beforehand (whose calculation hasn't been taken towards the time complexity, [see this](counting_sort/counting_sort.cpp#L7)) and its space complexity is O(k+n) and I had to limit the input in order to avoid segmentation faults.
+
+Radix sort also has a space complexity of O(k+n) so the input had to be capped as well ([see this](radix_sort/radix_sort.cpp#L11)).
+
+![O(kn) chart](./figures/O(kn).svg)
+<img src="./figures/O(kn).svg">
+
+### O(n lg(n))
+
+Following the list are std:sort, merge and shell, among others, with a time complexity of O(n lg(n)).
+
+std::sort is a special case since it uses three different sorting algorithms depending on the input data size and depth. For this study, std:sort was using quick sort, which is a special case again because it's time complexity is O(n^2) for the worst case, but its running times are much smaller because it's very easy to be optimized. Check out [this site](https://www.khanacademy.org/computing/computer-science/algorithms/quick-sort/a/analysis-of-quicksort) for more info.
+
+![O(kn) chart](./figures/O(n).svg)
+<img src="./figures/O(kn).svg">
 
 
 
@@ -124,7 +145,7 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 Please make sure to update tests as appropriate.
 
-Also note this project was made for learning and fun, I'm sure it's not the most effciient code out there.
+Also note this project was made for learning and fun, I'm sure it's not the most efficient code out there.
 
 
 ## License
