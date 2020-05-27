@@ -28,19 +28,19 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Running the example
 
-1. Clone the repository
+1. Clone the repository.
 
     ```
     git clone https://github.com/cutlas62/sorting-algorithms.git
     ```
 
-2. Compile the code (you may have to change directory)
+2. Compile the code (you may have to change directory).
 
     ```
     make
     ```
 
-3. Run the example
+3. Run the example.
 
     ```
     ./main -a bubble
@@ -58,7 +58,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Generating test data
 
-1. After cloning the respository, compile the test_data_generator file
+1. After cloning the respository, compile the test_data_generator file.
 
     ```
     make generator
@@ -108,6 +108,11 @@ All the possible values for `<algorithm>` are:
 - `selection` for seletion sort
 - `shell` for shell sort
 
+So, 
+
+- `./main -f 500random.txt -a gnome -s` will sort the data file `test_data/500random.txt` using gnome sort and will display statistics (time, array accesses and comparisons).
+- `./main -a merge -v` will sort the data file `test_data/100random.txt` (default file unless otherwise specified) using merge sort and displaying verbose info (both unsorted and sorted arrays).
+
 
 ## Time complexity analysis
 
@@ -124,12 +129,12 @@ Also note this project was made for learning and fun, I'm sure it's not the most
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
 Hat tip to:
 
-* [GeeksForGeeks](www.geeksforgeeks.org)
-* [Interview Cake](www.interviewcake.com)
+* [GeeksForGeeks](http://www.geeksforgeeks.org)
+* [Interview Cake](http://www.interviewcake.com)
 * [My gf](https://github.com/evaesteban) for continuous support
