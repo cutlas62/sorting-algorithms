@@ -126,7 +126,6 @@ Counting sort needs the maximum element beforehand (whose calculation hasn't bee
 
 Radix sort also has a space complexity of O(k+n) so the input had to be capped as well ([see this](radix_sort/radix_sort.cpp#L11)).
 
-![O(kn) chart](./figures/O(kn).svg)
 <img src="./figures/O(kn).svg">
 
 ### O(n lg(n))
@@ -135,8 +134,7 @@ Following the list are std:sort, merge and shell, among others, with a time comp
 
 std::sort is a special case since it uses three different sorting algorithms depending on the input data size and depth. For this study, std:sort was using quick sort, which is a special case again because it's time complexity is O(n^2) for the worst case, but its running times are much smaller because it's very easy to be optimized. Check out [this site](https://www.khanacademy.org/computing/computer-science/algorithms/quick-sort/a/analysis-of-quicksort) for more info.
 
-![O(kn) chart](./figures/O(n).svg)
-<img src="./figures/O(kn).svg">
+<img src="./figures/O(n lg(n)).svg">
 
 
 
