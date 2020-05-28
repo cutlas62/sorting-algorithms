@@ -19,7 +19,23 @@ The following algorithms have been implemented:
 - [selection sort](selection_sort/selection_sort.cpp)
 - [shell sort](shell_sort/shell_sort.cpp)
 
+## Table of contents
 
+<!--ts-->
+   * [Sorting Algorithms](#sorting-algorithms)
+   * [Table of contents](#table-of-contents)
+   * [Getting Started](#getting-started)
+      * [Running the example](#running-the-example)
+      * [Generating test data](#generating-test-data)
+      * [Testing the algorithms](#testing-the-algorithms)
+   * [Time complexity analysis](#time-complexity-analysis)
+      * [O(kn)](#okn)
+      * [O(n lg(n))](#onlgn)
+      * [O(n^2)](#on2)
+   * [Contributing](#contributing)
+   * [License](#license)
+   * [Acknowledgments](#acknowledgments)
+<!--te-->
 
 ## Getting Started
 
