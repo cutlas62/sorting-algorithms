@@ -134,8 +134,29 @@ Following the list are std:sort, merge and shell, among others, with a time comp
 
 std::sort is a special case since it uses three different sorting algorithms depending on the input data size and depth. For this study, std:sort was using quick sort, which is a special case again because it's time complexity is O(n^2) for the worst case, but its running times are much smaller because it's very easy to be optimized. Check out [this site](https://www.khanacademy.org/computing/computer-science/algorithms/quick-sort/a/analysis-of-quicksort) for more info.
 
+
 <img src="./figures/O(n lg(n)).svg">
 
+
+### O(n^2)
+
+At the end of the list we have bubble, insertion, cocktail shaker (double insertion), selection and gnome sorts. These are usually the easiest to implement but the least efficient as well.
+
+For a small number of inputs, the performance difference between O(n lg(n)) and O(n^2) may not look too big as in the image below. For an input array of 250 elements, the difference between the best and the worst algorithms is only around 200 microseconds.
+
+<img src="./figures/all_low_n.svg">
+
+However, as the input size increases, so does the running time. For a 500.000 element input array, the running time goes from 62 milliseconds to 12 minutes...
+
+<img src="./figures/all_high_n.svg">
+
+Does this means we should ALWAYS use a sorting algorithm with a time complexity of O(n lg(n)) instead of O(n^2)? Well, for the majority of cases the answer is yes, but not always. The previous measurements were taken for a random input but in the best-case scenario, the roles are switched.
+
+<img src="./figures/all_sorted_input.svg">
+
+To sum up, what sorting algorithm should be used depends on many different aspects such as input size, input randomness, available RAM and number of CPU/GPU cores available. For example, bitonic is very popular in parallel structures but not so much in single CPU systems. If you are sorting totally random data, merge sort should be fine but if you are inserting a new entry into a sorted database, insertion sort might be the way to go...
+
+And in embedded systems, never forget about the space complexity.
 
 
 ## Contributing
