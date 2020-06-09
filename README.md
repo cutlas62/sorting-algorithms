@@ -29,7 +29,7 @@ The following algorithms have been implemented:
       * [Generating test data](#generating-test-data)
       * [Testing the algorithms](#testing-the-algorithms)
    * [Time complexity analysis](#time-complexity-analysis)
-      * [O(kn)](#okn)
+      * [O(k+n)](#ok+n)
       * [O(nlg(n))](#onlgn)
       * [O(n^2)](#on2)
    * [Contributing](#contributing)
@@ -134,7 +134,7 @@ So,
 
 The whole time complexity study and all these graphs were run on an AMD Ryzen 9 4900HS single core.
 
-### O(kn)
+### O(k+n)
 
 Counting and Radix sort top the list when it comes to low execution times, but this comes at a price
 
