@@ -29,7 +29,7 @@ The following algorithms have been implemented:
       * [Generating test data](#generating-test-data)
       * [Testing the algorithms](#testing-the-algorithms)
    * [Time complexity analysis](#time-complexity-analysis)
-      * [O(k+n)](#ok+n)
+      * [O(k+n)](#okn)
       * [O(nlg(n))](#onlgn)
       * [O(n^2)](#on2)
    * [Contributing](#contributing)
